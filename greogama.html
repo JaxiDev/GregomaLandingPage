@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GREGOMA - Importación, exportación y servicios logísticos integrales. 9 años de experiencia en comercio exterior y aduanas.">
+    <meta name="keywords" content="importación, exportación, servicios aduanales, logística, padrón de importadores, despacho aduanal, comercio exterior">
+    <title>GREGOMA - Soluciones Logísticas Integrales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #003366;
+            --accent: #ff7f00;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            text-align: justify;
+            hyphens: auto;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 5px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .header-container {
+            padding: 5px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .logo {
+            font-size: 24px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .mobile-menu:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 180px 20px 100px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease 0.2s;
+            text-align: center;
+        }
+        
+        .hero .btn {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease 0.4s;
+        }
+        
+        .hero.animated h1,
+        .hero.animated p,
+        .hero.animated .btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e67300;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.4s;
+            background-color: var(--accent);
+        }
+        
+        .btn:hover::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 80px 0;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            text-align: center;
+        }
+        
+        .section-title.animated h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.5s ease;
+        }
+        
+        .section-title h2:hover::after {
+            width: 120px;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .about-text p, .about-text li {
+            text-align: justify;
+            hyphens: auto;
+            margin-bottom: 15px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .about-content.animated .about-text,
+        .about-content.animated .about-image {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-text h3 {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: rotateY(10deg) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+        
+        .services-grid.animated .service-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card:nth-child(1) { transition-delay: 0.1s; }
+        .service-card:nth-child(2) { transition-delay: 0.2s; }
+        .service-card:nth-child(3) { transition-delay: 0.3s; }
+        .service-card:nth-child(4) { transition-delay: 0.4s; }
+        .service-card:nth-child(5) { transition-delay: 0.5s; }
+        .service-card:nth-child(6) { transition-delay: 0.6s; }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            background-color: var(--primary);
+            color: white;
+            font-size: 40px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover .service-icon {
+            background-color: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            transition: color 0.3s;
+            text-align: center;
+        }
+        
+        .service-content p {
+            text-align: justify;
+            hyphens: auto;
+        }
+        
+        .service-card:hover .service-content h3 {
+            color: var(--primary);
+        }
+        
+        /* Experience Section */
+        .experience {
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        }
+        
+        .experience p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            text-align: justify;
+            hyphens: auto;
+        }
+        
+        .experience.animated p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background-color: var(--light);
+        }
+        
+        .faq-item {
+            background-color: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .faq-container.animated .faq-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .faq-item:nth-child(1) { transition-delay: 0.1s; }
+        .faq-item:nth-child(2) { transition-delay: 0.2s; }
+        .faq-item:nth-child(3) { transition-delay: 0.3s; }
+        .faq-item:nth-child(4) { transition-delay: 0.4s; }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover .faq-question {
+            background-color: var(--secondary);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .faq-answer p {
+            text-align: justify;
+            hyphens: auto;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-info {
+            background-color: var(--secondary);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            transform: translateY(0);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transform: translateY(0);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .contact-grid.animated .contact-info,
+        .contact-grid.animated .contact-form {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: left;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .contact-item i {
+            margin-right: 15px;
+            font-size: 20px;
+            color: var(--accent);
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-align: left;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            animation: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .footer-grid.animated .footer-col {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .footer-col:nth-child(1) { transition-delay: 0.1s; }
+        .footer-col:nth-child(2) { transition-delay: 0.2s; }
+        .footer-col:nth-child(3) { transition-delay: 0.3s; }
+        .footer-col:nth-child(4) { transition-delay: 0.4s; }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: left;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .footer-col:hover h3::after {
+            width: 80px;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.4s;
+        }
+        
+        footer.animated .copyright {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 20px 80px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            /* Ajustes de texto justificado en móviles */
+            body, .about-text p, .about-text li, 
+            .service-content p, .experience p, 
+            .faq-answer p {
+                text-align: left;
+                hyphens: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="logo">GREG<span>OMA</span></div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Quiénes Somos</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#experiencia">Experiencia</a></li>
+                    <li><a href="#faq">Preguntas Frecuentes</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Soluciones Logísticas Integrales</h1>
+            <p>Expertos en importación, exportación y servicios aduanales con 9 años de experiencia en el ramo. Ofrecemos soluciones personalizadas para tu negocio.</p>
+            <a href="#contacto" class="btn">Contáctanos</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quiénes Somos</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Su socio confiable en comercio exterior</h3>
+                    <p>Somos una importadora y exportadora de bienes que además ofrece servicios logísticos y de comercialización. Nuestro compromiso es facilitar sus operaciones de comercio exterior con profesionalismo y eficiencia.</p>
+                    <p>Entre nuestros servicios se encuentran:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Renta del padrón de importadores general y específicos</li>
+                        <li>Coordinación logística integral de puerta a puerta</li>
+                        <li>Despacho aduanal en diferentes puertos y aeropuertos del país</li>
+                        <li>Contratación de seguros</li>
+                        <li>Y muchos servicios más para sus necesidades de comercio exterior</li>
+                    </ul>
+                    <p>Nos adaptamos a sus requerimientos específicos para ofrecer soluciones a medida.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo GREGOMA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Importación y Exportación</h3>
+                        <p>Gestión integral de sus operaciones de comercio exterior, desde la cotización hasta la entrega final, asegurando el cumplimiento de todas las regulaciones aduaneras y requisitos legales para cada tipo de mercancía.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Logística Integral</h3>
+                        <p>Coordinación de transporte puerta a puerta, nacional e internacional, por vía marítima, aérea o terrestre, optimizando costos y tiempos de entrega mediante nuestra red de proveedores confiables.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Despacho Aduanal</h3>
+                        <p>Tramitación ágil y eficiente en diferentes puertos y aeropuertos del país, con personal altamente calificado que garantiza el correcto manejo de su mercancía y el cumplimiento de todas las normativas.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Padrón de Importadores</h3>
+                        <p>Renta de padrón de importadores general y específicos para facilitar sus operaciones, ideal para empresas que inician en el comercio exterior o realizan importaciones esporádicas.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros</h3>
+                        <p>Contratación de seguros para proteger su mercancía durante el transporte y almacenaje, con coberturas adaptadas a las características específicas de cada tipo de producto y modalidad de transporte.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Almacenaje</h3>
+                        <p>Soluciones de almacenamiento temporal y distribución para su mercancía, con instalaciones seguras y estratégicamente ubicadas para optimizar sus operaciones logísticas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience" id="experiencia">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra Experiencia</h2>
+            </div>
+            <p>Nos encontramos iniciando operaciones como comercializadora, pero contamos con <span class="highlight">9 años de experiencia en el ramo aduanal</span>. Este bagaje nos permite ofrecer servicios con el más alto nivel de profesionalismo y conocimiento técnico.</p>
+            <p>Nuestro equipo está conformado por expertos en comercio exterior, logística y aduanas, comprometidos con brindar soluciones eficientes y personalizadas a cada cliente, asegurando que sus operaciones cumplan con todas las regulaciones vigentes y optimizando sus costos logísticos.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Preguntas Frecuentes</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué documentos necesito para importar?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los documentos básicos requeridos para realizar una importación incluyen: factura comercial original que detalle la descripción, valor y cantidad de la mercancía; conocimiento de embarque o guía aérea que acredite el contrato de transporte; pedimento de importación debidamente llenado; y en algunos casos específicos, certificados de origen, normas oficiales mexicanas, permisos sanitarios o fitosanitarios, dependiendo del tipo de producto. Es importante destacar que los requisitos pueden variar significativamente según la clasificación arancelaria del producto y el país de origen. Nuestros asesores especializados pueden orientarle de manera precisa sobre los documentos específicos requeridos para su operación en particular.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cuánto tiempo tarda un despacho aduanal?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>El tiempo estimado para completar un despacho aduanal puede variar considerablemente dependiendo de varios factores clave: el tipo de mercancía (si está sujeta a regulaciones especiales), el régimen aduanero aplicable (definitivo, temporal, depósito fiscal, etc.), el puerto o aeropuerto de entrada seleccionado (algunos tienen mayor volumen de operaciones), y especialmente la completitud y corrección de la documentación presentada. En condiciones normales y con toda la documentación en orden, un despacho puede oscilar entre 24 horas para mercancías simples y hasta 5 días hábiles para productos que requieren verificaciones adicionales. Con GREGOMA, optimizamos los tiempos al máximo mediante procesos estandarizados y relaciones estratégicas con las autoridades aduanales.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué ventajas tiene rentar un padrón de importadores?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Rentar un padrón de importadores registrado ofrece múltiples ventajas estratégicas para su operación: Le permite realizar operaciones de importación sin necesidad de tramitar su propio padrón, lo que representa un ahorro significativo de tiempo (el trámite puede tardar semanas) y recursos (evitando costos de gestoría y requisitos de capital mínimo). Es particularmente ideal para empresas que están iniciando en el comercio exterior o que realizan importaciones esporádicas, ya que les permite operar inmediatamente sin cumplir con todos los requisitos para obtener su propio padrón. Además, nuestro servicio incluye asesoría permanente sobre el uso correcto del padrón y actualizaciones regulatorias, garantizando el cumplimiento normativo en todo momento.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Ofrecen servicios de asesoría para nuevos importadores?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, en GREGOMA ofrecemos un servicio integral de asesoría especialmente diseñado para nuevos importadores, que incluye: Orientación detallada sobre las regulaciones y requisitos específicos para su tipo de producto; clasificación arancelaria precisa para determinar impuestos y restricciones aplicables; cálculo anticipado de impuestos y costos logísticos para una mejor planeación financiera; optimización de costos logísticos mediante el análisis de las mejores rutas y modalidades de transporte; asesoría en la selección de proveedores internacionales confiables; y capacitación sobre los procesos aduanales y documentación requerida. Nuestro objetivo fundamental es que sus operaciones de importación sean exitosas desde el primer intento, minimizando riesgos y maximizando eficiencias.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacto</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Datos de Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Teléfono/WhatsApp: 442 272 5638</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Correo: admin@gregoma.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook: GREGOMA</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Querétaro, México</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Horario: Lunes a Viernes 9:00 - 18:00 hrs</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/524422725638" class="whatsapp-btn" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GREGOMA</h3>
+                    <p>Importadora, exportadora y proveedora de servicios logísticos integrales con 9 años de experiencia en el ramo aduanal, comprometida con la excelencia en el comercio exterior y la satisfacción total de nuestros clientes.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Importación</a></li>
+                        <li><a href="#">Exportación</a></li>
+                        <li><a href="#">Despacho Aduanal</a></li>
+                        <li><a href="#">Logística Integral</a></li>
+                        <li><a href="#">Padrón de Importadores</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Quiénes Somos</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt"></i> 442 272 5638</li>
+                        <li><i class="fas fa-envelope"></i> admin@gregoma.com</li>
+                        <li><i class="fab fa-facebook-f"></i> GREGOMA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 GREGOMA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+            this.querySelector('i').classList.toggle('fa-bars');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav').classList.remove('active');
+                document.querySelector('.mobile-menu i').classList.remove('fa-times');
+                document.querySelector('.mobile-menu i').classList.add('fa-bars');
+            });
+        });
+        
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentNode;
+                item.classList.toggle('active');
+                
+                // Close other open items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por su mensaje. Nos pondremos en contacto con usted pronto.');
+            this.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Intersection Observer for scroll animations
+        const animateOnScroll = function() {
+            // Hero section animation (trigger immediately)
+            const hero = document.querySelector('.hero');
+            hero.classList.add('animated');
+            
+            // Set up Intersection Observer for other elements
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements with animation classes
+            const sectionsToAnimate = [
+                '.section-title',
+                '.about-content',
+                '.services-grid',
+                '.experience',
+                '.faq-container',
+                '.contact-grid',
+                '.footer-grid',
+                'footer'
+            ];
+            
+            sectionsToAnimate.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    observer.observe(element);
+                });
+            });
+        };
+        
+        // Initialize animations when page loads
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
