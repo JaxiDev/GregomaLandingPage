@@ -29,12 +29,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
     });
 });
 
-// Form submission
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Gracias por su mensaje. Nos pondremos en contacto con usted pronto.');
-    this.reset();
-});
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -103,7 +97,43 @@ const animateOnScroll = function() {
             observer.observe(element);
         });
     });
+
+    // Observador para sección de ubicaciones
+    const ubicacionesSection = document.querySelector('.ubicaciones-container');
+    const observerUbicaciones = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('animated');
+      
+      // Animación escalonada para items de la lista
+      document.querySelectorAll('.ubicaciones-list li').forEach((item, index) => {
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, index * 150);
+      });
+      
+      // Animación para el SVG
+      document.querySelector('.mapa-svg').style.opacity = '1';
+      document.querySelector('.mapa-svg').style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.3 });
+
+if(ubicacionesSection) {
+  observerUbicaciones.observe(ubicacionesSection);
+}
 };
+
 
 // Initialize animations when page loads
 window.addEventListener('load', animateOnScroll);
+
+// Validación de formulario
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+  if (!this.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  this.classList.add('was-validated');
+}, false);

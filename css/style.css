@@ -255,6 +255,14 @@ nav ul li:hover::after {
   transition: all 0.8s ease;
 }
 
+#servicios .section-title h2 {
+  color: #ffffff !important;
+}
+
+#servicios .section-title h2::after {
+  background-color: white !important;
+}
+
 .section-title.animated h2 {
   opacity: 1;
   transform: translateY(0);
@@ -331,7 +339,11 @@ nav ul li:hover::after {
 
 /* Services Section */
 .services {
-  background-color: var(--light);
+  padding: 80px 0;
+  background: #0056B3;
+  background: linear-gradient(69deg, rgba(0, 86, 179, 1) 0%, rgba(4, 61, 77, 1) 72%);
+  animation: gradientAnimation 15s ease infinite;
+  background-size: 400% 400%;
 }
 
 .services-grid {
@@ -369,12 +381,38 @@ nav ul li:hover::after {
 }
 
 .service-icon {
-  background-color: var(--primary);
-  color: white;
-  font-size: 40px;
-  padding: 30px;
-  text-align: center;
-  transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-bottom: 1rem;
+}
+
+.service-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .service-icon {
+        height: 150px;
+    }
+    .service-content h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-icon {
+        height: 120px;
+    }
 }
 
 .service-card:hover .service-icon {
@@ -587,13 +625,52 @@ nav ul li:hover::after {
   font-weight: 500;
 }
 
-.form-control {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: all 0.3s;
+.form-floating {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-floating label {
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  padding-left: 2.5rem;
+}
+
+.form-floating .form-control {
+  padding-left: 2.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--secondary);
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+  border-color: var(--primary);
+}
+
+.invalid-feedback {
+  display: none;
+  color: #dc3545;
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+}
+
+.was-validated .form-control:invalid {
+  border-color: #dc3545;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+  background-color: #004494;
 }
 
 .form-control:focus {
@@ -646,6 +723,12 @@ textarea.form-control {
 .whatsapp-btn:hover {
   transform: scale(1.1) rotate(10deg);
   animation: none;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Footer */
@@ -808,3 +891,102 @@ footer.animated .copyright {
       padding: 60px 0;
   }
 }
+
+/*    Mapa de México  */
+
+/* Ubicaciones Aduanales */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ubicaciones-container {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+    display: flex;
+    gap: 80px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.mapa-svg {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease 0.2s;
+    width: 100%;
+    max-width: 700px;
+    margin-right: 60px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.ubicaciones-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ubicaciones-list {
+    margin-right: 80px;
+    flex-shrink: 0;
+    padding-left: 30px;
+}
+
+.ubicaciones-list li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.ubicaciones-list li:hover {
+    background: #e9ecef;
+    transform: translateX(10px);
+}
+
+.ubicaciones-list li::before {
+    content: '📍';
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .ubicaciones-container {
+        flex-direction: column;
+    }
+    
+    .mapa-svg {
+        max-width: 300px;
+    }
+}
+
+
+/* Efectos hover para SVG */
+.mapa-svg:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+/* Resaltado de texto al hacer hover */
+.ubicaciones-list li:hover {
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Colores por región */
+[data-region='north'] { border-left: 4px solid #3498db; }
+[data-region='central'] { border-left: 4px solid #e74c3c; }
+[data-region='east'] { border-left: 4px solid #27ae60; }
+[data-region='west'] { border-left: 4px solid #f1c40f; }
+
